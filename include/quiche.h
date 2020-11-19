@@ -108,6 +108,9 @@ const char *quiche_version(void);
 int quiche_enable_debug_logging(void (*cb)(const char *line, void *argp),
                                 void *argp);
 
+// Set log level. The level should be one of ["OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE"] (case insensitive)
+void quiche_set_log_level(const char *level);
+
 // Stores configuration shared between multiple connections.
 typedef struct Config quiche_config;
 

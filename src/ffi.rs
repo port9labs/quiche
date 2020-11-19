@@ -81,6 +81,12 @@ pub extern fn quiche_enable_debug_logging(
 }
 
 #[no_mangle]
+pub extern fn quiche_set_log_level(level: *const c_char){
+    let l = unsafe { ffi::CStr::from_ptr(level).to_str().unwrap() };
+    log::set_max_level(log::Level::from_str(l).unwrap().to_level_filter());
+}
+
+#[no_mangle]
 pub extern fn quiche_config_new(version: u32) -> *mut Config {
     match Config::new(version) {
         Ok(c) => Box::into_raw(Box::new(c)),
